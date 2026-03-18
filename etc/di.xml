@@ -14,6 +14,8 @@
         <arguments>
             <argument name="handlers" xsi:type="array">
                 <item name="debug" xsi:type="object">Phong\ApiLogger\Model\Handler\Handler</item>
+                <item name="error" xsi:type="object">Phong\ApiLogger\Model\Handler\Handler</item>
+                <item name="system" xsi:type="object">Phong\ApiLogger\Model\Handler\Handler</item>
             </argument>
         </arguments>
     </virtualType>
