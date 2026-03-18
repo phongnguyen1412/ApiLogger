@@ -1,0 +1,11 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<button class="header" text="$col.getTitle()"
+        data-bind="mageInit: {'collapsible':{'active': false, 'content':'.data-grid-cell-content', 'header': '.header'}}">Show/Hide</button>
+<div style="padding: 20px" class="data-grid-cell-content" data-bind="text: $col.getLabel($row())"></div>
+
+
