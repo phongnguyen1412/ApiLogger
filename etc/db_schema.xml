@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="phong_logger_api" resource="default" engine="innodb" comment="Phong Logger API Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="text" name="method_rest" nullable="true" comment="Method Rest"/>
+        <column xsi:type="text" name="path_action" nullable="true" comment="Path Action"/>
+        <column xsi:type="text" name="input_data" nullable="true" comment="Input"/>
+        <column xsi:type="text" name="status" nullable="true" comment="Status"/>
+        <column xsi:type="text" name="output_response" nullable="true" comment="Output"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

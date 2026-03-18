@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Phong\ApiLogger\Api\LoggerApiRepositoryInterface" type="Phong\ApiLogger\Model\LoggerApiRepository"/>
+    <preference for="Phong\ApiLogger\Api\Data\LoggerApiInterface" type="Phong\ApiLogger\Model\Data\LoggerApi"/>
+    <preference for="Phong\ApiLogger\Api\Data\LoggerApiSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <virtualType name="Phong\ApiLogger\Model\Handler\Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/api_logger.log</argument>
+            <argument name="loggerType" xsi:type="const">\Monolog\Logger::INFO</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Phong\ApiLogger\Model\Handler\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Phong\ApiLogger\Model\Handler\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Phong\ApiLogger\Model\ResourceModel\LoggerApi\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">phong_logger_api</argument>
+            <argument name="resourceModel" xsi:type="string">Phong\ApiLogger\Model\ResourceModel\LoggerApi\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Webapi\Controller\Rest">
+        <plugin name="Phong\RestApiLog" type="Phong\ApiLogger\Plugin\ApiLogger"/>
+    </type>
+    <type name="Magento\Framework\Webapi\Rest\Response">
+        <plugin name="Phong\WebApiLog" type="Phong\ApiLogger\Plugin\ApiLogger" />
+    </type>
+    <type name="Phong\ApiLogger\Plugin\RestApiLogger">
+        <arguments>
+            <argument name="logger" xsi:type="object">Phong\ApiLogger\Model\Handler\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="phong_apilogger_logger_grid_data_source" xsi:type="string">Phong\ApiLogger\Model\ResourceModel\LoggerApi\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
